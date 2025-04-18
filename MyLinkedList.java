@@ -84,13 +84,32 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public void removeFirst() {
-
+        if (head == null) {
+            throw new IndexOutOfBoundsException("List is empty");
+        }
+        head = head.next;
+        if (head != null) {
+            head.prev = null;
+        } else {
+            tail = null;
+        }
+        length--;
     }
 
     @Override
     public void removeLast() {
-
+        if (tail == null) {
+            throw new IndexOutOfBoundsException("List is empty");
+        }
+        tail = tail.prev;
+        if (tail != null) {
+            tail.next = null;
+        } else {
+            head = null;
+        }
+        length--;
     }
+
 
     @Override
     public Iterator<T> iterator() {
