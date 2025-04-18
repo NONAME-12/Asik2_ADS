@@ -17,8 +17,30 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public void add(int index, T item) {
+        if (index < 0 || index > length) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + length);
+        }
+        if (index == 0) {
+            addFirst(item);
+            return;
+        }
+        if (index == length) {
+            addLast(item);
+            return;
+        }
 
+        MyNode<T> curr = head;
+        for (int i = 0; i < index; i++) {
+            curr = curr.next;
+        }
+        MyNode<T> node = new MyNode<>(item);
+        node.prev = curr.prev;
+        node.next = curr;
+        curr.prev.next = node;
+        curr.prev = node;
+        length++;
     }
+
 
     @Override
     public int size() {
