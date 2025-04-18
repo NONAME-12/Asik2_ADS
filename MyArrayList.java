@@ -45,7 +45,7 @@ public class MyArrayList<T> implements MyList<T>{
 
     @Override
     public void addLast(T item) {
-
+        add(item);
     }
 
     @Override
@@ -64,8 +64,16 @@ public class MyArrayList<T> implements MyList<T>{
     }
 
     @Override
-    public void removeLast() {
+    public void set(int index, T item) {
+        checkIndex(index);
+        elements[index] = item;
+    }
 
+
+    @Override
+    public void removeLast() {
+        if (lenght == 0) throw new IndexOutOfBoundsException("List is empty");
+        remove(lenght - 1);
     }
 
     private void checkIndex(int index) {

@@ -150,6 +150,17 @@ public class MyLinkedList<T> implements MyList<T> {
         length--;
     }
 
+    @Override
+    public void set(int index, T item) {
+        if (index < 0 || index >= length) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + length);
+        }
+        MyNode<T> curr = head;
+        for (int i = 0; i < index; i++) {
+            curr = curr.next;
+        }
+        curr.data = item;
+    }
 
     @Override
     public Iterator<T> iterator() {
