@@ -12,18 +12,7 @@ public class MyLinkedList<T> implements MyList<T> {
     }
     @Override
     public void add(T item) {
-        MyNode<T> newNode = new MyNode<>(item);
-        if(head == null){
-            head = newNode;
-        }
-        else {
-            MyNode<T> current = head;
-            while(current.next != null){
-                current = current.next;
-            }
-            current.next = newNode;
-        }
-        length++;
+        addLast(item);
     }
 
     @Override
@@ -70,7 +59,15 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public void addLast(T item) {
-
+        MyNode<T> node = new MyNode<>(item);
+        if (tail == null) {
+            head = tail = node;
+        } else {
+            tail.next = node;
+            node.prev = tail;
+            tail = node;
+        }
+        length++;
     }
 
     @Override
