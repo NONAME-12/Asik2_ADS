@@ -2,10 +2,12 @@ import java.util.Iterator;
 
 public class MyLinkedList<T> implements MyList<T> {
     private MyNode<T> head;
+    private MyNode<T> tail;
     private int length;
 
+
     public MyLinkedList() {
-        head = null;
+        head = tail = null;
         length = 0;
     }
     @Override
@@ -55,7 +57,15 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public void addFirst(T item) {
-
+        MyNode<T> node = new MyNode<>(item);
+        node.next = head;
+        if (head != null) {
+            head.prev = node;
+        } else {
+            tail = node;
+        }
+        head = node;
+        length++;
     }
 
     @Override
@@ -65,12 +75,14 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public T getFirst() {
-        return null;
+        if (head == null) throw new IndexOutOfBoundsException();
+        return head.data;
     }
 
     @Override
     public T getLast() {
-        return null;
+        if (tail == null) throw new IndexOutOfBoundsException();
+        return tail.data;
     }
 
     @Override
